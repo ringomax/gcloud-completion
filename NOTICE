@@ -1,0 +1,10 @@
+gcloud-completion
+
+Generated completion data is derived from Google Cloud CLI's
+data/cli/gcloud_completions.py, distributed by Google LLC under Apache License 2.0.
+The generated files convert the original command and flag dictionaries into the
+Fig specification format and add loading boundaries and positional placeholders.
+They do not include account information or live Google Cloud resource data.
+
+Google Cloud CLI: https://cloud.google.com/sdk
+Figxit: https://github.com/en3sis/figxit

@@ -1,0 +1,53 @@
+name: Latest SDK
+on:
+  schedule:
+    - cron: '23 0 * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/**'
+      - 'tests/**'
+      - '.github/workflows/latest-sdk.yml'
+permissions:
+  contents: read
+concurrency:
+  group: latest-sdk-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - uses: google-github-actions/setup-gcloud@v3
+        id: sdk
+        with:
+          version: latest
+      - run: python3 -m unittest discover -s tests -v
+      - name: Generate from the latest official SDK
+        run: python3 scripts/generate.py --output .tmp/latest
+      - name: Validate every command and flag
+        run: python3 scripts/validate.py --specs .tmp/latest
+      - name: Report upstream changes
+        run: |
+          python3 - <<'PY'
+          import json, os
+          from pathlib import Path
+          current = json.loads(Path('specs/metadata.json').read_text())
+          latest = json.loads(Path('.tmp/latest/metadata.json').read_text())
+          changed = any(current[k] != latest[k] for k in ('sdk_version', 'source_sha256'))
+          status = 'Upstream SDK data changed' if changed else 'Snapshot matches latest SDK data'
+          text = f"## {status}\n\nSnapshot: {current['sdk_version']}\n\nLatest: {latest['sdk_version']}\n\n"
+          text += f"Validated {latest['nodes']} nodes, {latest['flags']} flags.\n\nSource SHA-256: `{latest['source_sha256']}`\n"
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as summary:
+              summary.write(text)
+          print(text)
+          PY
+          cp LICENSE NOTICE .tmp/latest/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gcloud-figxit-${{ steps.sdk.outputs.version }}
+          path: .tmp/latest/
+          retention-days: 30

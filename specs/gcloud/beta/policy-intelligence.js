@@ -1,0 +1,2 @@
+// Generated from Google Cloud CLI; see NOTICE.
+export default {"name":"policy-intelligence","subcommands":[{"name":"simulate","subcommands":[{"name":"orgpolicy","options":[{"name":"--custom-constraints","isPersistent":true,"args":{"name":"CUSTOM_CONSTRAINTS"}},{"name":"--organization","isPersistent":true,"args":{"name":"ORGANIZATION"}},{"name":"--policies","isPersistent":true,"args":{"name":"POLICIES"}}],"args":{"name":"ARGUMENT","isOptional":true,"isVariadic":true}}]}]};
