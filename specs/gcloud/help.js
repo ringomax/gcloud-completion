@@ -1,0 +1,2 @@
+// Generated from Google Cloud CLI; see NOTICE.
+export default {"name":"help","options":[{"name":"--filter","isPersistent":true,"args":{"name":"FILTER"}},{"name":"--limit","isPersistent":true,"args":{"name":"LIMIT"}},{"name":"--page-size","isPersistent":true,"args":{"name":"PAGE_SIZE"}},{"name":"--sort-by","isPersistent":true,"args":{"name":"SORT_BY"}}],"args":{"name":"ARGUMENT","isOptional":true,"isVariadic":true}};

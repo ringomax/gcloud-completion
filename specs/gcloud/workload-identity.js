@@ -1,0 +1,2 @@
+// Generated from Google Cloud CLI; see NOTICE.
+export default {"name":"workload-identity","subcommands":[{"name":"service-agents","subcommands":[{"name":"generate","options":[{"name":"--folder","isPersistent":true,"args":{"name":"FOLDER"}},{"name":"--location","isPersistent":true,"args":{"name":"LOCATION"}},{"name":"--organization","isPersistent":true,"args":{"name":"ORGANIZATION"}},{"name":"--service","isPersistent":true,"args":{"name":"SERVICE"}}],"args":{"name":"ARGUMENT","isOptional":true,"isVariadic":true}}]}]};

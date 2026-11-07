@@ -1,0 +1,22 @@
+name: CI
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python3 -m unittest discover -s tests -v
+      - uses: google-github-actions/setup-gcloud@v3
+        with:
+          version: '590.0.1'
+      - name: Validate snapshot against its SDK
+        run: python3 scripts/validate.py
+      - name: Check reproducibility
+        run: |
+          python3 scripts/generate.py
+          git diff --exit-code

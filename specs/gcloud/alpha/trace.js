@@ -1,0 +1,2 @@
+// Generated from Google Cloud CLI; see NOTICE.
+export default {"name":"trace","subcommands":[{"name":"sinks","subcommands":[{"name":"create","args":{"name":"ARGUMENT","isOptional":true,"isVariadic":true}},{"name":"delete","args":{"name":"ARGUMENT","isOptional":true,"isVariadic":true}},{"name":"describe","args":{"name":"ARGUMENT","isOptional":true,"isVariadic":true}},{"name":"list","args":{"name":"ARGUMENT","isOptional":true,"isVariadic":true}},{"name":"update","args":{"name":"ARGUMENT","isOptional":true,"isVariadic":true}}]}]};
